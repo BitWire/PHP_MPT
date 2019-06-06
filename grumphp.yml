@@ -1,0 +1,25 @@
+parameters:
+    git_dir: .
+    bin_dir: vendor/bin
+    tasks:
+      file_size:
+        max_size: 5M
+      git_commit_message:
+        allow_empty_message: false
+        enforce_capitalized_subject: true
+        enforce_no_subject_trailing_period: true
+        enforce_single_lined_subject: true
+        max_body_width: 80
+        max_subject_width: 80
+        case_insensitive: false
+        multiline: true
+        additional_modifiers: ''
+      phpcs:
+        standard: "phpcs.xml"
+        whitelist_patterns:
+           - /^app\/(.*)/
+           - /^tests\/(.*)/
+      phpmd:
+        exclude: ['tests', 'ide']
+        ruleset: ['phpmd.xml']
+        triggered_by: ['php']

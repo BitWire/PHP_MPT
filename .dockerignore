@@ -1,0 +1,12 @@
+Dockerfile
+.dockerignore
+.env.example
+.git
+.gitattributes
+.gitignore
+grumphp.yml
+phpcs.xml
+phpmd.xml
+phpunit.xml
+README.md
+server.php
