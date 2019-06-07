@@ -17,7 +17,6 @@ class ChartService
         \Lava::PieChart("OS", $osOverview, [
             'width' => 600,
             'height' => 480,
-            'colors' => ['#374f67','#4e6378','#647789', '#7b8a9a', '#919eab', '#a8b2bd'],
         ]);
     }
 }
