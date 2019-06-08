@@ -15,7 +15,7 @@ class DataController extends Controller
         $ChartService = new ChartService;
         $StockExchangeService = new StockExchangeService;
         $input = $request->input();
-        $data = $StockExchangeService->getData($input['stock']);
+        $data = $StockExchangeService->getData($input['stock'], $input['timeseries']);
         if ($data != false) {
             $ChartService->printChart($data);
             echo \Lava::render('LineChart', 'OS', 'os-chart');
