@@ -9,7 +9,8 @@
         "fideloper/proxy": "^4.0",
         "guzzlehttp/guzzle": "^6.3",
         "khill/lavacharts": "^3.1",
-        "laravel/framework": "5.8.*"
+        "laravel/framework": "5.8.*",
+        "markrogoyski/math-php": "0.*"
     },
     "require-dev": {
         "filp/whoops": "^2.0",
@@ -56,20 +57,6 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ]
-    },
+    }
 
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "git@bitbucket.org:gastfreund/deploy.git"
-        },
-        {
-            "type": "vcs",
-            "url": "git@bitbucket.org:gastfreund/api-healthcheck.git"
-        },
-        {
-            "type": "vcs",
-            "url": "git@bitbucket.org:gastfreund/api-services.git"
-        }
-    ]
 }
