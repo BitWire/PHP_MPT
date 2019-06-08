@@ -56,7 +56,6 @@ class CalcService
 
     public function returnsMeanData($data)
     {
-        $returns = [];
         $interim = [];
         foreach ($data as $values) {
             foreach ($values as $symbol => $price) {
@@ -71,7 +70,6 @@ class CalcService
             $interim[$symbol] = ((float)$value/count($data));
             $interim[$symbol] = ((float)$value*250);
         }
-        dd($interim);
-        return $returns;
+        return $interim;
     }
 }
