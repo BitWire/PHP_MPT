@@ -8,12 +8,11 @@ class ChartService
     {
         $stockdata = \Lava::DataTable();  // Lava::DataTable() if using Laravel
         $stockdata->addStringColumn('datetime');
-        $end = end($data);
+        $keys = array_keys(end($data));
         reset($data);
-        foreach ($end as $key => $value) {
-            \Log::info('Array point: ' . $key);
-            $stockdata->addNumberColumn($key);
-            $value = 0;
+        for ($i = 0; $i < count($keys); $i++) {
+            \Log::info('Array point: ' . $keys[$i]);
+            $stockdata->addNumberColumn($keys[$i]);
         }
         foreach ($data as $date => $values) {
             $interim = [];
@@ -26,6 +25,7 @@ class ChartService
         \Lava::LineChart($name, $stockdata, [
             'width' => 1280,
             'height' => 720,
+            'title' => $name,
         ]);
     }
 }

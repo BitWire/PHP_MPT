@@ -27,7 +27,8 @@ class DataController extends Controller
             $data = $CalcService->reworkStockData($stockdata, $timeseries);
             $returnsPrecise = $CalcService->returnsPreciseData($stockdata, $timeseries);
             $returnsMean = $CalcService->returnsMeanData($returnsPrecise);
-
+            $covPrecise = $CalcService->covPrecise($data);
+            $covAnnual = $CalcService->covPrecise($data, true);
             $ChartService->printChartStock('Stockprice', $data);
             $ChartService->printChartStock('ReturnsPrecise', $returnsPrecise);
 
@@ -38,6 +39,6 @@ class DataController extends Controller
         } else {
             $code = 500;
         }
-        return View::make('welcome')->with(['code' => $code, 'MeanData' => $returnsMean]);
+        return View::make('welcome')->with(['code' => $code, 'MeanData' => $returnsMean, 'CovPrecise' => $covPrecise, 'CovAnnual' => $covAnnual]);
     }
 }

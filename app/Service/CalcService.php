@@ -2,6 +2,8 @@
 
 namespace App\Service;
 
+use MathPHP\Statistics\Correlation;
+
 class CalcService
 {
     public function setTimeSeries($timeseries)
@@ -54,7 +56,7 @@ class CalcService
         return $returns;
     }
 
-    public function returnsMeanData($data)
+    public function returnsMeanData($data, $annual = true)
     {
         $interim = [];
         foreach ($data as $values) {
@@ -68,8 +70,34 @@ class CalcService
         }
         foreach ($interim as $symbol => $value) {
             $interim[$symbol] = ((float)$value/count($data));
-            $interim[$symbol] = ((float)$value*250);
+            if ($annual == true) {
+                $interim[$symbol] = ((float)$value*250);
+            }
         }
         return $interim;
+    }
+
+    public function covPrecise($data, $annual = false)
+    {
+        $interim = [];
+        $symbols = [];
+        foreach ($data as $date => $values) {
+            $date = $date;
+            foreach ($values as $symbol => $price) {
+                $interim[$symbol][] = (float)$price;
+            }
+        }
+        $symbols = array_keys($interim);
+        $cov = [];
+        for ($i = 0; $i < count($interim); $i++) {
+            for ($j = 0; $j < count($interim); $j++) {
+                if ($annual == false) {
+                    $cov[$symbols[$i]][$symbols[$j]] = Correlation::covariance($interim[$symbols[$i]], $interim[$symbols[$j]]);
+                    continue;
+                }
+                $cov[$symbols[$i]][$symbols[$j]] = (Correlation::covariance($interim[$symbols[$i]], $interim[$symbols[$j]]))*250;
+            }
+        }
+        return $cov;
     }
 }
