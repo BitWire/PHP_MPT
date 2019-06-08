@@ -20,17 +20,24 @@ class DataController extends Controller
         $input = $request->input();
         $timeseries = 'monthly';
         if (array_key_exists('timeseries', $input)) {
-            $timeseries == $input['timeseries'];
+            $timeseries = $input['timeseries'];
         }
         $stockdata = $StockExchangeService->getData($input['stock'], $timeseries);
         if ($stockdata != false) {
             $data = $CalcService->reworkStockData($stockdata, $timeseries);
-            $ChartService->printChartStock($data, $timeseries);
+            $returnsPrecise = $CalcService->returnsPreciseData($stockdata, $timeseries);
+            $returnsMean = $CalcService->returnsMeanData($returnsPrecise);
+
+            $ChartService->printChartStock('Stockprice', $data);
+            $ChartService->printChartStock('ReturnsPrecise', $returnsPrecise);
+
             echo \Lava::render('LineChart', 'Stockprice', 'stockprice-chart');
+            echo \Lava::render('LineChart', 'ReturnsPrecise', 'returnsprecise-chart');
+
             $code = 200;
         } else {
             $code = 500;
         }
-        return View::make('welcome')->with(['code' => $code]);
+        return View::make('welcome')->with(['code' => $code, 'MeanData' => $returnsMean]);
     }
 }

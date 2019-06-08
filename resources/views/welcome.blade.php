@@ -71,7 +71,7 @@
         <div class="flex-container position-ref"> 
             <div class="content"> 
             <div id="stockprice-chart"></div>
-            <div id="returns-chart"></div>
+            <div id="returnsprecise-chart"></div>
         </div>
     </body>
 </html>                

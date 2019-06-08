@@ -4,7 +4,7 @@ namespace App\Service;
 
 class ChartService
 {
-    public function printChartStock($data)
+    public function printChartStock($name, $data)
     {
         $stockdata = \Lava::DataTable();  // Lava::DataTable() if using Laravel
         $stockdata->addStringColumn('datetime');
@@ -12,7 +12,7 @@ class ChartService
         reset($data);
         foreach ($end as $key => $value) {
             \Log::info('Array point: ' . $key);
-            $stockdata->addNumberColumn('adjusted close of '. $key);
+            $stockdata->addNumberColumn($key);
             $value = 0;
         }
         foreach ($data as $date => $values) {
@@ -23,7 +23,7 @@ class ChartService
             }
             $stockdata->addRow($interim);
         }
-        \Lava::LineChart('Stockprice', $stockdata, [
+        \Lava::LineChart($name, $stockdata, [
             'width' => 1280,
             'height' => 720,
         ]);
