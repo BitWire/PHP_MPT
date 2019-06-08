@@ -4,35 +4,26 @@ namespace App\Service;
 
 class ChartService
 {
-    public function printChart($data, $timeseries)
+    public function printChartStock($data)
     {
         $stockdata = \Lava::DataTable();  // Lava::DataTable() if using Laravel
         $stockdata->addStringColumn('datetime');
-        $row = [];
-        if ($timeseries == 'daily') {
-            $unit = 'Time Series (Daily)';
-        } else {
-            $unit = 'Monthly Adjusted Time Series';
+        $end = end($data);
+        reset($data);
+        foreach ($end as $key => $value) {
+            \Log::info('Array point: ' . $key);
+            $stockdata->addNumberColumn('adjusted close of '. $key);
+            $value = 0;
         }
-        for ($i = 0; $i < count($data); $i++) {
-            \Log::info('Array punkt: ' . $i);
-            $stockdata->addNumberColumn('adjusted close of '. $data[$i]['Meta Data']['2. Symbol']);
-            $start = $data[$i][$unit];
-            foreach ($start as $key => $value) {
-                \Log::info($key . ' : ' . $value['5. adjusted close']);
-                $row[$key][] = $value['5. adjusted close'];
-            }
-        }
-        $reverse_rows = array_reverse($row);
-        foreach ($reverse_rows as $key => $value) {
+        foreach ($data as $date => $values) {
             $interim = [];
-            $interim[] = $key;
-            for ($i = 0; $i < count($value); $i++) {
-                $interim[] = $value[$i];
+            $interim[] = $date;
+            foreach ($values as $price) {
+                $interim[] = $price;
             }
             $stockdata->addRow($interim);
         }
-        \Lava::LineChart('OS', $stockdata, [
+        \Lava::LineChart('Stockprice', $stockdata, [
             'width' => 1280,
             'height' => 720,
         ]);

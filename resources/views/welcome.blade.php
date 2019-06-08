@@ -58,28 +58,20 @@
                 text-transform: uppercase;
             }
 
-            .m-b-md {
-                margin-bottom: 30px;
+            .flex-container {
+                display: flex;
+                justify-content: center;
             }
 
-            .rcorners1 {
-                color: white;
-                border-radius: 25px;
-                background: #374f67;
-                padding: 10px; 
-                width: 200px;
-                height: 150px;
-                margin-bottom: 8px;  
-            }
         </style>
     </head>
     <body>
         <h1 style="text-align:center">Stock Data</h1>
         <p  style="text-align:center">Code: <?php echo $code ?></p>
-        <div class="flex-center position-ref"> 
+        <div class="flex-container position-ref"> 
             <div class="content"> 
-
-            <div id="os-chart" style="float:right"></div>
+            <div id="stockprice-chart"></div>
+            <div id="returns-chart"></div>
         </div>
     </body>
 </html>                
