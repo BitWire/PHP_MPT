@@ -74,20 +74,10 @@
         </style>
     </head>
     <body>
-        <h1 style="text-align:center">Wifi Statusdaten für das Objekt mit der ID: <?php echo $objectId ?></h1>
-        <p  style="text-align:center">Alle Zahlen beziehen sich immer auf die letzten 30 Tage.</p>
+        <h1 style="text-align:center">Stock Data</h1>
+        <p  style="text-align:center">Code: <?php echo $code ?></p>
         <div class="flex-center position-ref"> 
             <div class="content"> 
-                <ul style="float:left">
-                    <div class="rcorners1">
-                        <p>Seitenaufrufe</p>
-                        <h1><?php echo $sessions ?></h1>
-                    </div>
-                    <div class="rcorners1">
-                        <p>Nutzer</p>
-                        <h1><?php echo $users ?></h1>
-                    </div>
-                </ul>
 
             <div id="os-chart" style="float:right"></div>
         </div>

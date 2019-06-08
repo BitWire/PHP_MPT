@@ -14,11 +14,15 @@ class DataController extends Controller
     {
         $ChartService = new ChartService;
         $StockExchangeService = new StockExchangeService;
-        $blob = $request->input();
-        $StockExchangeService->getData($blob);
-        $ChartService->printChart("u");
-
-        echo \Lava::render('PieChart', 'OS', 'os-chart');
-        return View::make('welcome')->with([]);
+        $input = $request->input();
+        $data = $StockExchangeService->getData($input['stock']);
+        if ($data != false) {
+            $ChartService->printChart($data);
+            echo \Lava::render('LineChart', 'OS', 'os-chart');
+            $code = 200;
+        } else {
+            $code = 500;
+        }
+        return View::make('welcome')->with(['code' => $code]);
     }
 }

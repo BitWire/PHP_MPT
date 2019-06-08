@@ -1,0 +1,10 @@
+<ul style="float:left">
+    <div class="rcorners1">
+        <p>Seitenaufrufe</p>
+        <h1></h1>
+    </div>
+    <div class="rcorners1">
+        <p>Nutzer</p>
+        <h1></h1>
+    </div>
+</ul>
