@@ -4,7 +4,7 @@ namespace App\Service;
 
 class ChartService
 {
-    public function printChartStock($name, $data)
+    public function printLineChart($name, $data)
     {
         $stockdata = \Lava::DataTable();  // Lava::DataTable() if using Laravel
         $stockdata->addStringColumn('datetime');
@@ -26,6 +26,28 @@ class ChartService
             'width' => 1280,
             'height' => 720,
             'title' => $name,
+        ]);
+    }
+
+    public function printScatterChart($name, $data)
+    {
+        $stockdata = \Lava::DataTable();  // Lava::DataTable() if using Laravel
+        $stockdata->addNumberColumn('Volatilites');
+        $stockdata->addNumberColumn('Returns');
+        for ($i = 0; $i < count($data['Returns']); $i++) {
+            $stockdata->addRow([(float)$data['Volatilites'][$i],(float)$data['Returns'][$i]]);
+        }
+        \Lava::ScatterChart($name, $stockdata, [
+            'width' => 1280,
+            'height' => 720,
+            'title' => $name,
+            'hAxis' => [
+                'title' => 'Volatilities'
+            ],
+            'vAxis' => [
+                'title' => 'Returns'
+            ]
+
         ]);
     }
 }

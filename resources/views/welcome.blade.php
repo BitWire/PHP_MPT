@@ -67,11 +67,12 @@
     </head>
     <body>
         <h1 style="text-align:center">Stock Data</h1>
-        <p  style="text-align:center">Code: <?php echo $code ?></p>
+        <p  style="text-align:center">Code: <?php echo $code ?> - <?php $date = new DateTime(); echo $date->getTimestamp(); ?></p>
         <div class="flex-container position-ref"> 
             <div class="content"> 
             <div id="stockprice-chart"></div>
             <div id="returnsprecise-chart"></div>
+            <div id="portfolio-chart"></div>
         </div>
     </body>
 </html>                
