@@ -2,6 +2,8 @@
 
 namespace App\Service;
 
+use App\Service\UtilService;
+
 class ChartService
 {
     public function printLineChart($name, $data)
@@ -34,8 +36,15 @@ class ChartService
         $stockdata = \Lava::DataTable();  // Lava::DataTable() if using Laravel
         $stockdata->addNumberColumn('Volatilites');
         $stockdata->addNumberColumn('Returns');
+        $stockdata->addStringColumn('Weights', null, 'tooltip');
         for ($i = 0; $i < count($data['Returns']); $i++) {
-            $stockdata->addRow([(float)$data['Volatilites'][$i],(float)$data['Returns'][$i]]);
+            $stockKeys = array_keys($data['Stock Weights'][$i]);
+            $stockValues = array_values($data['Stock Weights'][$i]);
+            $tooltip = 'Volatilities: ' . UtilService::toPercent((float)$data['Volatilites'][$i]) . "\n" . 'Returns: ' . UtilService::toPercent((float)$data['Returns'][$i]) . "\n";
+            for ($j = 0; $j < count($stockKeys); $j++) {
+                $tooltip = $tooltip . $stockKeys[$j] . ' ' . $stockValues[$j] . "\n";
+            }
+            $stockdata->addRow([(float)$data['Volatilites'][$i],(float)$data['Returns'][$i], $tooltip]);
         }
         \Lava::ScatterChart($name, $stockdata, [
             'width' => 1280,

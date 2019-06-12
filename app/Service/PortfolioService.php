@@ -14,28 +14,29 @@ class PortfolioService
         $port_returns = [];
         $port_volatility = [];
         $stock_weights = [];
-
         $num_assets = count($covPrecise);
-        $num_portfolios = 50000;
+        $num_portfolios = 25000;
+        
         for ($i = 0; $i < $num_portfolios; $i++) {
             $weights = UtilService::getFloatRand($num_assets, 0, 1);
-            $weightsSum = 0;
             $returns = 0;
             $returnsMeanClean = [];
+            $symbols = [];
+            $symbolWeights = [];
             $covAnnualClean = [];
             $volatility = [];
             $interim = [];
             $interim2 = 0;
- 
-            for ($j = 0; $j < count($weights); $j++) {
-                $weightsSum = $weightsSum + $weights[$j];
-            }
-            for ($j = 0; $j < count($weights); $j++) {
-                $weights[$j] = ($weights[$j] / $weightsSum);
+
+            $weights = $this->calcWeight($weights);
+
+            foreach ($returnsMean as $symbol => $value) {
+                $symbols[] = $symbol;
+                $returnsMeanClean[] = $value;
             }
 
-            foreach ($returnsMean as $value) {
-                $returnsMeanClean[] = $value;
+            for ($j = 0; $j < count($symbols); $j++) {
+                $symbolWeights[$symbols[$j]] = UtilService::toPercent($weights[$j]);
             }
 
             foreach ($covAnnual as $value) {
@@ -52,11 +53,22 @@ class PortfolioService
                     $interim = (Multi::multiply($covAnnualClean[$j], $weights));
                     $interim2 = $interim2 + $weights[$j] * $interim[$j];
             }
-            $volatility = sqrt((float)$interim2);
-            $port_returns[] = $returns;
+            $volatility = sqrt($interim2);
+            $port_returns[] = $returns*100;
             $port_volatility[] = $volatility;
-            $stock_weights[] = $weights;
+            $stock_weights[] = $symbolWeights;
         }
-        return ['Returns' => $port_returns, 'Volatilites' => $port_volatility];
+        return ['Returns' => $port_returns, 'Volatilites' => $port_volatility, 'Stock Weights' => $stock_weights];
+    }
+    public function calcWeight($weights)
+    {
+        $weightsSum = 0;
+        for ($j = 0; $j < count($weights); $j++) {
+            $weightsSum = $weightsSum + $weights[$j];
+        }
+        for ($j = 0; $j < count($weights); $j++) {
+            $weights[$j] = ($weights[$j] / $weightsSum);
+        }
+        return $weights;
     }
 }

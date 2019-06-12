@@ -22,4 +22,9 @@ class UtilService
         }
         return $output;
     }
+
+    public static function toPercent($input)
+    {
+        return round((float)$input * 100) . '%';
+    }
 }
