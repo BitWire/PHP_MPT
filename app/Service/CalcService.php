@@ -118,7 +118,6 @@ class CalcService
     public function cov(array $data, bool $annual = false)
     {
         $interim = [];
-        $symbols = [];
         foreach ($data as $date => $values) {
             $date = $date;
             $count = 0;
@@ -128,7 +127,6 @@ class CalcService
             }
         }
         $matrix = MatrixFactory::create($interim);
-        $symbols = array_keys($interim);
         if ($annual == false) {
             $cov = $matrix->covarianceMatrix();
         } else {

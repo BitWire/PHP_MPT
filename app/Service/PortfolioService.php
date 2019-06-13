@@ -24,7 +24,7 @@ class PortfolioService
         $port_volatility = [];
         $stock_weights = [];
         $num_assets = count($covPrecise);
-        $num_portfolios = 25000;
+        $num_portfolios = 30000;
         
         for ($i = 0; $i < $num_portfolios; $i++) {
             $weights = UtilService::getFloatRand($num_assets, 0, 1);
@@ -37,20 +37,20 @@ class PortfolioService
             $interim2 = 0;
 
             $weights = $this->calcWeight($weights);
-            //splits the $returnsMean in a keys and in a values array for later use.
+            //splits the $returnsMean in a keys and a values array for later use.
             foreach ($returnsMean as $symbol => $value) {
                 $symbols[] = $symbol;
                 $returnsMeanClean[] = $value;
             }
-            //Calculates the weights to actual percentages for use in the Chart.
+            //Converts the weights to actual percentages for use in the Chart.
             for ($j = 0; $j < count($symbols); $j++) {
                 $symbolWeights[$symbols[$j]] = UtilService::toPercent($weights[$j]);
             }
-            //Calculates the the returns for this portfolio.
+            //Calculates the the weighted returns for this portfolio.
             for ($j = 0; $j < count($weights); $j++) {
                 $returns = $returns + $weights[$j]*$returnsMeanClean[$j];
             }
-            //Calculates the volatility.
+            //Calculates the weighted volatility for this portfolio.
             for ($j = 0; $j < count($weights); $j++) {
                     $interim = (Multi::multiply($covAnnual[$j], $weights));
                     $interim2 = $interim2 + $weights[$j] * $interim[$j];
@@ -65,7 +65,7 @@ class PortfolioService
     }
 
     /**
-     * Calculates the actual weigths out of the random numbers generated.
+     * Calculates the actual weights out of the random numbers generated.
      *
      * @param array $weights
      *

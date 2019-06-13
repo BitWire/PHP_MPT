@@ -12,3 +12,4 @@ yarn-error.log
 api-creds.json
 /build/
 /tests/test-results.xml
+.vscode
