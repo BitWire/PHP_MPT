@@ -1,7 +1,11 @@
 # The Modern Portfolio Theory
 
 This is a PHP implementation of the Modern Portfolio Theory. I made this as part of a Seminar essay and presentation.
-This Project is based on Laravel 5.8 and PHP 7.1.
+This Project is based on Laravel 5.8 and PHP 7.1 and the medium articles about the MPT by Bernard Brenyah. 
+Really worth a read! 
+
+- [Markowitz’s Efficient Frontier in Python [Part 1/2]](https://medium.com/python-data/effient-frontier-in-python-34b0c3043314)
+- [Efficient Frontier & Portfolio Optimization with Python [Part 2/2]](https://medium.com/python-data/efficient-frontier-portfolio-optimization-with-python-part-2-2-2fe23413ad94)
 
 ## Installation
 
