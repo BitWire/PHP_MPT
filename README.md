@@ -7,7 +7,7 @@ Really worth a read!
 - [Markowitz’s Efficient Frontier in Python [Part 1/2]](https://medium.com/python-data/effient-frontier-in-python-34b0c3043314)
 - [Efficient Frontier & Portfolio Optimization with Python [Part 2/2]](https://medium.com/python-data/efficient-frontier-portfolio-optimization-with-python-part-2-2-2fe23413ad94)
 
-All the commands are suited for use under Linux, specifically tested under Ubuntu 19.04!
+All the commands are suited for use under Linux, specifically tested under Ubuntu 19.04.
 
 ## Installation
 
