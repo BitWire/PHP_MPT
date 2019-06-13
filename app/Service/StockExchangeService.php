@@ -2,6 +2,8 @@
 
 namespace App\Service;
 
+use App\Service\UtilService;
+
 class StockExchangeService
 {
 
@@ -36,6 +38,8 @@ class StockExchangeService
                 return false;
             }
         }
+        //This checks if the Stockdata is roughly in the same timespan.
+        $data = UtilService::validateStocks($data);
         return $data;
     }
 }

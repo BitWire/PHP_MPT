@@ -60,12 +60,7 @@ class CalcService
             $reverse_rows = array_reverse($row);
             $last = 0.0;
             foreach ($reverse_rows as $date => $price) {
-                if ((float)$last != 0.0) {
-                    $returns[$date][$data[$i]['Meta Data']['2. Symbol']] = ((((float)$price)/(float)$last)-1);
-                    $last = $price;
-                    continue;
-                }
-                $returns[$date][$data[$i]['Meta Data']['2. Symbol']] = 0.0;
+                $returns[$date][$data[$i]['Meta Data']['2. Symbol']] = ((float)$last === 0.0) ? 0.0 : ((((float)$price)/(float)$last)-1);
                 $last = $price;
             }
         }

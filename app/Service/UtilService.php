@@ -53,4 +53,33 @@ class UtilService
     {
         return round((float)$input * 100) . '%';
     }
+    /**
+     * This function validates if the Stocks are in the same timespan.
+     * Very rough, could be done better.
+     *
+     * @param array $data : the stockdata returned from the API
+     *
+     * @return array
+     */
+    public static function validateStocks(array $data)
+    {
+        $refresh = [];
+        for ($i = 0; $i < count($data); $i++) {
+            $date = explode(' ', $data[$i]['Meta Data']['3. Last Refreshed']);
+            $refresh[] = $date[0];
+        }
+        $good_date = '';
+        $count = array_count_values($refresh);
+        foreach ($count as $date => $frequency) {
+            if (0.5 <= ($frequency/count($refresh))) {
+                $good_date = $date;
+            }
+        }
+        for ($i = 0; $i < count($data); $i++) {
+            if (strpos($data[$i]['Meta Data']['3. Last Refreshed'], $good_date) !== false) {
+                $output[] = $data[$i];
+            }
+        }
+        return $output;
+    }
 }
