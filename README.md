@@ -1,16 +1,38 @@
-# Wifi Statspage
+# The Modern Portfolio Theory
 
+This is a PHP implementation of the Modern Portfolio Theory. I made this as part of a Seminar essay and presentation.
+This Project is based on Laravel 5.8 and PHP 7.1.
 
 ## Installation
+
+In root directory:
 ```
-cd /var/www/wifi-statspage
 composer install
 ```
 
 The `.env.example` to `.env` and app key generation should be done automatically.
-Edit the `.env` File to your needs (Local testing or production).
+Edit the `.env` File to your needs. Dont forget to input an APIKEY!
 
-Then set up grump PHP to sniff commits.
+## Usage
+Start the debugserver with the command `php artisan serve` in the root directory of the Project.
+
+In a browser, open: 
+
+```
+127.0.0.1:8000/?stocks=XXX,XXX,XXX,XXX
+```
+where XXX is a valid stock symbol. you can use up to 5 stocks. Optionally you can use timeseries to change the requested data between monthly adjusted (monthly) and daily adjusted (daily) stock prices. This defaults to daily. 
+
+## Used Libarys:
+
+ - [The Laravel Framework](https://github.com/laravel/laravel)
+ - [Guzzle](http://docs.guzzlephp.org/en/stable/overview.html)
+ - [LavaCharts](https://github.com/kevinkhill/lavacharts)
+ - [MathPHP](https://github.com/markrogoyski/math-php)
+
+
+ ## Setup to contribute
+Set up grumPHP to sniff commits.
 ```
  php ./vendor/bin/grumphp git:init --config=./grumphp.yml
 ```
@@ -18,14 +40,3 @@ To autofix possible Codestyle errors, use:
 ```
 composer autofix-phpcs
 ```
-Copy your service worker credentials (json File!) into the root directory of the project.
-
-Start the debugserver with the command `php artisan serve` in the root directory of the Project.
-
-## Usage
-In a browser, open: 
-
-```
-127.0.0.1:8000/?objectId=XXXXX
-```
-where XXXX is a valid ObjectId.

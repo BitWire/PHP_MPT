@@ -5,6 +5,18 @@ namespace App\Service;
 class StockExchangeService
 {
 
+    /**
+     * This functions lonely purpose is to request data from the API for the wanted stocks and timeseries
+     * I use alpha vantage as data provider, which limits me to 5 API requests per minute.
+     * Feel free to implement any other data provider such as quandl and make a pull request so everybody can use it.
+     *
+     * The APIKEY for aphavantage can be inserted in the .env file, you can request your own free key under https://www.alphavantage.co
+     *
+     * @param string $stocks : the string with stocks from the request
+     * @param string $timeseries: the timeseries the user requested
+     *
+     * @return array
+     */
     public function getData(string $stocks, string $timeseries)
     {
         $client = new \GuzzleHttp\Client();

@@ -66,7 +66,7 @@
         </style>
     </head>
     <body>
-        <h1 style="text-align:center">Stock Data</h1>
+        <h1 style="text-align:center">Modern Portfolio Theory</h1>
         <p  style="text-align:center">Code: <?php echo $code ?> - <?php $date = new DateTime(); echo $date->getTimestamp(); ?></p>
         <div class="flex-container position-ref"> 
             <div class="content"> 

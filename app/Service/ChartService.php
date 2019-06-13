@@ -4,11 +4,37 @@ namespace App\Service;
 
 use App\Service\UtilService;
 
+/**
+ * This class is responsible for creating the Charts you see on the website
+ */
+
 class ChartService
 {
-    public function printLineChart($name, $data)
+    /**
+     * This function creates the two Linecharts.
+     *
+     * Structure of $data:
+     * array => [
+     *  "Returns" => [
+     *      "symbol" : "price",
+     *      "symbol" : "price",
+     *  ],
+     * "Volatilities" => [
+     *      "symbol" : "price",
+     *      "symbol" : "price",
+     *  ]
+     *  ...
+     * ]
+     *
+     * @param string $name : Name of the Chart
+     * @param array $data : Data you want to have rendered as a Linechart
+     *
+     * @return void
+     *
+     */
+    public function printLineChart(string $name, array $data)
     {
-        $stockdata = \Lava::DataTable();  // Lava::DataTable() if using Laravel
+        $stockdata = \Lava::DataTable();
         $stockdata->addStringColumn('datetime');
         $keys = array_keys(end($data));
         reset($data);
@@ -31,7 +57,36 @@ class ChartService
         ]);
     }
 
-    public function printScatterChart($name, $data)
+    /**
+     * This function creates the Scatterchart.
+     *
+     * Structure of $data:
+     * array => [
+     *  "Returns" => [
+     *      [0] : "percentage",
+     *      [1] : "percentage",
+     *      ...
+     *  ],
+     * "Volatilities" => [
+     *      [0] : "percentage",
+     *      [1] : "percentage",
+     *      ...
+     *  ],
+     *  "Stock Weights" => [
+     *      [0] : "percentage",
+     *      [1] : "percentage",
+     *      ...
+     *  ]
+     * ]
+     *
+     * @param string $name : Name of the Chart
+     * @param array $data : Data you want to have rendered as a Scatterchart
+     *
+     * @return void
+     *
+     */
+
+    public function printScatterChart(string $name, array $data)
     {
         $stockdata = \Lava::DataTable();  // Lava::DataTable() if using Laravel
         $stockdata->addNumberColumn('Volatilites');
@@ -50,6 +105,9 @@ class ChartService
             'width' => 1280,
             'height' => 720,
             'title' => $name,
+            'legend' => [
+                'position' => 'none'
+            ],
             'hAxis' => [
                 'title' => 'Volatilities'
             ],
