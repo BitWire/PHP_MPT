@@ -54,7 +54,8 @@ class UtilService
         return round((float)$input * 100) . '%';
     }
     /**
-     * This function validates if the Stocks are in the same timespan.
+     * This function validates if the Stocks are in the same timespan by comparing the refreshdates.
+     * The Refreshdate which is used most frequently wins and the stocks with different dates will be dropped. 
      * Very rough, could be done better.
      *
      * @param array $data : the stockdata returned from the API
