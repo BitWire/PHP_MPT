@@ -18,6 +18,7 @@ composer install
 
 The `.env.example` to `.env` and app key generation should be done automatically.
 Edit the `.env` File to your needs. Dont forget to input an APIKEY!
+You can get your free APIKEY at [Alpha Vantage](https://www.alphavantage.co/support/#api-key)
 
 ## Usage
 Start the debugserver with the command `php artisan serve` in the root directory of the Project.
