@@ -37,7 +37,11 @@ where XXX is a valid stock symbol. you can use up to 5 stocks. Optionally you ca
  - [LavaCharts](https://github.com/kevinkhill/lavacharts)
  - [MathPHP](https://github.com/markrogoyski/math-php)
 
-
+ ## TODO
+  - I have to check the monthly timeseries again, they are apparently broken
+  - A good validator would be great for the data to be in the same timespan or else the whole program will break down
+  - Lots of stuff I probably forgot and will add here when I remember it.
+  
  ## Setup to contribute
 Set up grumPHP to sniff commits.
 ```
