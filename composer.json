@@ -7,6 +7,7 @@
     "require": {
         "php": "^7.1.3",
         "guzzlehttp/guzzle": "^6.3",
+        "guzzlehttp/psr7": "^1.8.5",
         "khill/lavacharts": "^3.1",
         "laravel/framework": "5.8.*",
         "markrogoyski/math-php": "0.*"
